@@ -1,22 +1,34 @@
 module.exports = {
   env: {
     browser: true,
-    es2021: true,
-    node: true,
+    es6: true,
   },
-  extends: [
-    "eslint:recommended",
-    "plugin:react/recommended",
-    "plugin:tailwind/recommended",
-    "plugin:prettier/recommended",
-  ],
+  parser: 'babel-eslint',
+  extends: ['airbnb', 'prettier', 'prettier/react'],
+  globals: {
+    Atomics: 'readonly',
+    SharedArrayBuffer: 'readonly',
+  },
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
+      modules: true,
     },
-    ecmaVersion: 12,
-    sourceType: "module",
+    ecmaVersion: 2021,
+    sourceType: 'module',
   },
-  plugins: ["react"],
-  rules: {},
+  plugins: ['react', 'prettier'],
+  rules: {
+    'prettier/prettier': 'error',
+    'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
+    'react/forbid-prop-types': [0, { forbid: ['any'] }],
+    'react/prop-types': 0,
+    'react/jsx-uses-react': 'off',
+    'react/react-in-jsx-scope': 'off',
+  },
+  env: {
+    jest: true,
+    browser: true,
+    node: true,
+  },
 };

@@ -7,6 +7,7 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "jsdoc": "^3.6.7",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
@@ -16,7 +17,8 @@
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "docs": "jsdoc -c jsdoc.conf.json"
   },
   "eslintConfig": {
     "extends": [
@@ -38,11 +40,16 @@
   },
   "devDependencies": {
     "autoprefixer": "^9.8.6",
+    "babel-eslint": "^10.0.3",
+    "better-docs": "^2.3.2",
     "eslint": "^7.30.0",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-react": "^7.24.0",
-    "eslint-plugin-tailwind": "^0.2.1",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-config-prettier": "^6.9.0",
+    "eslint-plugin-import": "^2.19.1",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-react": "^7.17.0",
     "postcss": "^7.0.36",
+    "prettier": "^1.19.1",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.4"
   }
 }
