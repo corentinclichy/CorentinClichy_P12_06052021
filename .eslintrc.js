@@ -2,6 +2,8 @@ module.exports = {
   env: {
     browser: true,
     es6: true,
+    jest: true,
+    node: true,
   },
   parser: 'babel-eslint',
   extends: ['airbnb', 'prettier', 'prettier/react'],
@@ -25,10 +27,5 @@ module.exports = {
     'react/prop-types': 0,
     'react/jsx-uses-react': 'off',
     'react/react-in-jsx-scope': 'off',
-  },
-  env: {
-    jest: true,
-    browser: true,
-    node: true,
   },
 };
