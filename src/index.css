@@ -15,3 +15,15 @@
 .shadow-header {
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
+
+.sessionLength-container {
+  background: #ff0000;
+}
+
+.strenghtMap-container {
+  background: #282d30;
+}
+
+.recharts-polar-angle-axis path {
+  fill: white !important;
+}

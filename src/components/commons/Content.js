@@ -1,4 +1,8 @@
+import DailyActivities from './DailyActivities';
+import SessionLength from './SessionLength';
 import StatCard from './StatCard';
+import StrenghtMap from './StrenghtMap';
+import Completion from './Completion';
 
 function Content() {
   return (
@@ -14,19 +18,22 @@ function Content() {
       <section className="user-stats flex gap-10 mt-5">
         <div className="left-wrapper flex-1 flex flex-col gap-5">
           <div className="row">
-            <div className="dailyActivities-container bg-gray-50 h-64">
-              <p>daily activities</p>
+            <div className="dailyActivities-container bg-gray-50 h-64 p-7 pb-3 rounded">
+              <DailyActivities />
             </div>
           </div>
           <div className="row flex w-100 justify-between">
-            <div className="dailyActivities-container bg-gray-50 h-72 w-72 ">
-              <p>daily activities</p>
+            <div className="sessionLength-container h-72 w-72 rounded relative flex fle-col justify-end items-end">
+              <h3 className="absolute top-10 left-10 w-36 text-white text-base opacity-50">
+                Durée moyenne des sessions
+              </h3>
+              <SessionLength />
             </div>
-            <div className="dailyActivities-container bg-gray-50 h-72 w-72">
-              <p>daily activities</p>
+            <div className="strenghtMap-container h-72 w-72 rounded">
+              <StrenghtMap />
             </div>
-            <div className="dailyActivities-container bg-gray-50 h-72 w-72">
-              <p>daily activities</p>
+            <div className="completion-container bg-gray-50 h-72 w-72 rounded">
+              <Completion />
             </div>
           </div>
         </div>
