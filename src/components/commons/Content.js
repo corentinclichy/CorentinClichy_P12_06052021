@@ -1,10 +1,16 @@
 import DailyActivities from './DailyActivities';
 import SessionLength from './SessionLength';
-import StatCard from './StatCard';
 import StrenghtMap from './StrenghtMap';
 import Completion from './Completion';
+import StatsCards from './StatsCards';
 
 function Content() {
+  const handleMove = (e) => {
+    const rect = e.target.getBoundingClientRect();
+    const x = e.clientX - rect.left; // x position within the element.
+    console.log(x); // has value for clientX, etc
+  };
+
   return (
     <main className="flex-1 p-7 pl-20 pr-0">
       <div className="header mb-7">
@@ -23,7 +29,9 @@ function Content() {
             </div>
           </div>
           <div className="row flex w-100 justify-between">
-            <div className="sessionLength-container h-72 w-72 rounded relative flex fle-col justify-end items-end">
+            <div
+              className="sessionLength-container h-72 w-72 rounded relative flex fle-col justify-end items-end"
+              onMouseMove={(e) => handleMove(e)}>
               <h3 className="absolute top-10 left-10 w-36 text-white text-base opacity-50">
                 Durée moyenne des sessions
               </h3>
@@ -37,12 +45,7 @@ function Content() {
             </div>
           </div>
         </div>
-        <div className="right-wrapper flex flex-col justify-between">
-          <StatCard />
-          <StatCard />
-          <StatCard />
-          <StatCard />
-        </div>
+        <StatsCards />
       </section>
     </main>
   );

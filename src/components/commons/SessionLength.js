@@ -1,3 +1,4 @@
+// import { useState } from 'react';
 import {
   LineChart,
   Line,
@@ -39,6 +40,8 @@ function SessionLength() {
     },
   ];
 
+  // const [move, setMove] = useState(0);
+
   const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
       return (
@@ -47,7 +50,6 @@ function SessionLength() {
         </div>
       );
     }
-
     return null;
   };
 
