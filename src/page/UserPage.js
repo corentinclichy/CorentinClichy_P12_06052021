@@ -66,9 +66,8 @@ function UserPage() {
   // Return the JSX to render specific element if the loading state is true
   if (loading) {
     return (
-      <div className="w-screen h-screen flex items-center justify-center">
-        <PacmanLoader color="#F50B00" size={60} />
-        <p className="pt-10">Loading...</p>
+      <div className="h-80 w-full mt-72 flex item-center justify-center relative">
+        <PacmanLoader color="#F50B00" size={60} className="" />
       </div>
     );
   }
