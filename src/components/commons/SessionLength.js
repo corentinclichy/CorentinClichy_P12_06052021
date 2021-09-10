@@ -1,4 +1,4 @@
-// import { useState } from 'react';
+// Specific import for recharts components
 import {
   LineChart,
   Line,
@@ -8,40 +8,86 @@ import {
   YAxis,
 } from 'recharts';
 
-function SessionLength() {
-  const data = [
-    {
-      day: 'L',
-      minute: 30,
-    },
-    {
-      day: 'M',
-      minute: 40,
-    },
-    {
-      day: 'M',
-      minute: 64,
-    },
-    {
-      day: 'J',
-      minute: 32,
-    },
-    {
-      day: 'V',
-      minute: 48,
-    },
-    {
-      day: 'S',
-      minute: 40,
-    },
-    {
-      day: 'D',
-      minute: 20,
-    },
-  ];
+/**
+ * @name SessionLength
+ * @param {Object} sessionsLength - get all the sessions length by date for a specific user
+ * @returns {JSX}
+ */
+function SessionLength({ sessionsLength }) {
+  // Map the sessions length array and return a correct format for recharts
+  const data = sessionsLength.map(({ day, sessionLength }) => {
+    let dayFirstLetter;
 
-  // const [move, setMove] = useState(0);
+    // Get the first letter of the day
+    switch (day) {
+      case 1:
+        dayFirstLetter = 'L';
+        break;
+      case 2:
+        dayFirstLetter = 'M';
+        break;
+      case 3:
+        dayFirstLetter = 'M';
+        break;
+      case 4:
+        dayFirstLetter = 'J';
+        break;
+      case 5:
+        dayFirstLetter = 'V';
+        break;
+      case 6:
+        dayFirstLetter = 'S';
+        break;
+      case 7:
+        dayFirstLetter = 'D';
+        break;
 
+      default:
+        break;
+    }
+
+    return {
+      day: dayFirstLetter,
+      minute: sessionLength,
+    };
+  });
+
+  // GET THE MAX AND MIN TO SET THE Y AXIS RANGE
+  const max = Math.max(...data.map(({ minute }) => minute));
+  const min = Math.min(...data.map(({ minute }) => minute));
+
+  // const data = [
+  //   {
+  //     day: 'L',
+  //     minute: 30,
+  //   },
+  //   {
+  //     day: 'M',
+  //     minute: 40,
+  //   },
+  //   {
+  //     day: 'M',
+  //     minute: 64,
+  //   },
+  //   {
+  //     day: 'J',
+  //     minute: 32,
+  //   },
+  //   {
+  //     day: 'V',
+  //     minute: 48,
+  //   },
+  //   {
+  //     day: 'S',
+  //     minute: 40,
+  //   },
+  //   {
+  //     day: 'D',
+  //     minute: 20,
+  //   },
+  // ];
+
+  // Specific styles for recharts components tooltip
   const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
       return (
@@ -54,17 +100,8 @@ function SessionLength() {
   };
 
   return (
-    <ResponsiveContainer width="100%" height="60%">
-      <LineChart
-        width={250}
-        height={186}
-        data={data}
-        margin={{
-          top: 30,
-          right: 10,
-          left: 10,
-          bottom: 5,
-        }}>
+    <ResponsiveContainer width="100%" height="100%">
+      <LineChart width="100%" height="100%" data={data}>
         <defs>
           <linearGradient id="colorUv" x1="0" y1="0" x2="1" y2="0">
             <stop offset="1%" stopColor="#cccccc" stopOpacity={0.3} />
@@ -78,17 +115,18 @@ function SessionLength() {
           axisLine={false}
           tick={{ fontSize: 12 }}
         />
-        <YAxis hide domain={[30, 60]} />
+        <YAxis hide domain={[min - 10, max + 50]} />
         <Tooltip
           content={<CustomTooltip />}
           cursor={{
             stroke: 'rgba(0, 0, 0, 0.1)',
-            strokeWidth: 0,
+            strokeWidth: 30,
             fill: 'blue',
           }}
         />
         <Line
           type="monotone"
+          margin={{ top: 100, right: 0, left: 0, bottom: 0 }}
           dataKey="minute"
           stroke="url(#colorUv)"
           strokeWidth={2}
@@ -98,9 +136,6 @@ function SessionLength() {
             fill: 'white',
             strokeWidth: 10,
             r: 5,
-          }}
-          margin={{
-            top: 100,
           }}
         />
       </LineChart>

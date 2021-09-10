@@ -5,11 +5,19 @@ import {
   PolarAngleAxis,
 } from 'recharts';
 
-function Completion() {
+function Completion({ todayScore, score }) {
+  let userScore;
+
+  if (todayScore === undefined) {
+    userScore = score;
+  } else {
+    userScore = todayScore;
+  }
+
   const data = [
     {
       name: 'userCompletion',
-      value: 12,
+      value: userScore * 100,
       fill: '#FF0000',
     },
   ];

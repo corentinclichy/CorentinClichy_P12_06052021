@@ -1,18 +1,17 @@
+import { Switch, Route } from 'react-router-dom';
 import './App.css';
-import Content from './components/commons/Content';
 
 // Components
 import Header from './components/commons/Header';
-import SideBar from './components/commons/SideBar';
+import UserPage from './page/UserPage';
 
 function App() {
   return (
     <div className="App">
       <Header />
-      <div className="flex content-container">
-        <SideBar />
-        <Content />
-      </div>
+      <Switch>
+        <Route path="/:id" component={UserPage} />
+      </Switch>
     </div>
   );
 }

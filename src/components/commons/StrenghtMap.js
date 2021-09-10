@@ -6,57 +6,81 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 
-function StrenghtMap() {
-  const data = [
-    {
-      subject: 'Intensité',
-      A: 120,
-      B: 110,
-      fullMark: 150,
-    },
-    {
-      subject: 'Vitesse',
-      A: 98,
-      B: 130,
-      fullMark: 150,
-    },
-    {
-      subject: 'Force',
-      A: 86,
-      B: 130,
-      fullMark: 150,
-    },
-    {
-      subject: 'Endurance',
-      A: 99,
-      B: 100,
-      fullMark: 150,
-    },
-    {
-      subject: 'Energie',
-      A: 85,
-      B: 90,
-      fullMark: 150,
-    },
-    {
-      subject: 'Cardio',
-      A: 65,
-      B: 85,
-      fullMark: 150,
-    },
-  ];
+/**
+ * @name StrenghtMap
+ * @param {Object} performance - get value performance data from specific area and render a radar chart
+ * @returns {JSX}
+ */
+function StrenghtMap({ performance }) {
+  // const data = [
+  //   {
+  //     subject: 'Intensité',
+  //     A: 120,
+  //     fullMark: 150,
+  //   },
+  //   {
+  //     subject: 'Vitesse',
+  //     A: 98,
+  //     fullMark: 150,
+  //   },
+  //   {
+  //     subject: 'Force',
+  //     A: 86,
+  //     fullMark: 150,
+  //   },
+  //   {
+  //     subject: 'Endurance',
+  //     A: 99,
+  //     fullMark: 150,
+  //   },
+  //   {
+  //     subject: 'Energie',
+  //     A: 85,
+  //     fullMark: 150,
+  //   },
+  //   {
+  //     subject: 'Cardio',
+  //     A: 65,
+  //     fullMark: 150,
+  //   },
+  // ];
 
-  //   const CustomTooltip = ({ active, payload }) => {
-  //     if (active && payload && payload.length) {
-  //       return (
-  //         <div className="bg-white p-4 flex flex-col justify-around">
-  //           <p className="text-xs text-black text-center">{`${payload[0].value} min`}</p>
-  //         </div>
-  //       );
-  //     }
+  // Get the max value of performance
+  // const maxValue = Math.max(...performance.map((item) => item.value));
 
-  //     return null;
-  //   };
+  const data = performance.map(({ value, kind }) => {
+    let areaOfPerformance;
+    // Get the area of performance according to the kind of performance
+    switch (kind) {
+      case 1:
+        areaOfPerformance = 'Cardio';
+        break;
+      case 2:
+        areaOfPerformance = 'Energy';
+        break;
+      case 3:
+        areaOfPerformance = 'Endurance';
+        break;
+      case 4:
+        areaOfPerformance = 'Strength';
+        break;
+      case 5:
+        areaOfPerformance = 'Speed';
+        break;
+      case 6:
+        areaOfPerformance = 'Intensity';
+        break;
+
+      default:
+        break;
+    }
+    // Return value in order to be able to render the radar chart
+    return {
+      subject: areaOfPerformance,
+      A: value,
+      fullMark: 150,
+    };
+  });
 
   return (
     <ResponsiveContainer width="100%" height="100%">
@@ -67,10 +91,10 @@ function StrenghtMap() {
           stroke="rgba(255, 255, 255)"
           tickLine={false}
           axisLine={false}
-          tick={{ fontSize: 14, dy: -2 }}
-          tickMargin={25}
+          tick={{ fontSize: 14, dy: 3 }}
+          tickMargin={30}
         />
-        <Radar name="Mike" dataKey="A" fill="#FF0101" fillOpacity={0.7} />
+        <Radar dataKey="A" fill="#FF0101" fillOpacity={0.7} />
       </RadarChart>
     </ResponsiveContainer>
   );

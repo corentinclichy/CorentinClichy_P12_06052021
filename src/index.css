@@ -40,3 +40,15 @@
 .recharts-polar-angle-axis path {
   fill: white !important;
 }
+
+.row {
+  height: 50%;
+}
+
+.dailyActivities-container {
+  height: 100%;
+}
+
+main {
+  width: 100%;
+}

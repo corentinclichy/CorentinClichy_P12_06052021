@@ -1,3 +1,4 @@
+// Recharts specific import
 import {
   BarChart,
   XAxis,
@@ -8,69 +9,87 @@ import {
   CartesianGrid,
 } from 'recharts';
 
-function DailyActivities() {
-  const data = [
-    {
-      day: 1,
-      weight: 86,
-      caloriesBurnt: 240,
-    },
-    {
-      day: 2,
-      weight: 86,
-      caloriesBurnt: 240,
-    },
-    {
-      day: 3,
-      weight: 86,
-      caloriesBurnt: 240,
-    },
-    {
-      day: 4,
-      weight: 86,
-      caloriesBurnt: 240,
-    },
-    {
-      day: 5,
-      weight: 86,
-      caloriesBurnt: 240,
-    },
-    {
-      day: 6,
-      weight: 86,
-      caloriesBurnt: 240,
-    },
-    {
-      day: 7,
-      weight: 86,
-      caloriesBurnt: 240,
-    },
-    {
-      day: 8,
-      weight: 86,
-      caloriesBurnt: 240,
-    },
-    {
-      day: 9,
-      weight: 86,
-      caloriesBurnt: 240,
-    },
-    {
-      day: 10,
-      weight: 86,
-      caloriesBurnt: 240,
-    },
-  ];
+/**
+ * @name DailyActivities
+ * @param {Object} Sessions - get all the sessions by date for a specific user
+ * @returns {JSX}
+ */
+function DailyActivities({ sessions }) {
+  // Map sessions to data
+  const data = sessions.map((session, index) => {
+    return {
+      day: index + 1,
+      weight: session.kilogram,
+      caloriesBurnt: session.calories,
+    };
+  });
 
+  // DETERMINE THE MAX AND MIN IN ORDER TO SET CORRECT DOMAIN FOR THE GRAPH
+  // Find the min weight in data
+  const minWeight = Math.min(...data.map((item) => item.weight));
+  // Find the max weight in data
+  const maxWeight = Math.max(...data.map((item) => item.weight));
+
+  // const Mockdata = [
+  //   {
+  //     day: 1,
+  //     weight: 86,
+  //     caloriesBurnt: 240,
+  //   },
+  //   {
+  //     day: 2,
+  //     weight: 86,
+  //     caloriesBurnt: 240,
+  //   },
+  //   {
+  //     day: 3,
+  //     weight: 86,
+  //     caloriesBurnt: 240,
+  //   },
+  //   {
+  //     day: 4,
+  //     weight: 86,
+  //     caloriesBurnt: 240,
+  //   },
+  //   {
+  //     day: 5,
+  //     weight: 86,
+  //     caloriesBurnt: 240,
+  //   },
+  //   {
+  //     day: 6,
+  //     weight: 86,
+  //     caloriesBurnt: 240,
+  //   },
+  //   {
+  //     day: 7,
+  //     weight: 86,
+  //     caloriesBurnt: 240,
+  //   },
+  //   {
+  //     day: 8,
+  //     weight: 86,
+  //     caloriesBurnt: 240,
+  //   },
+  //   {
+  //     day: 9,
+  //     weight: 86,
+  //     caloriesBurnt: 240,
+  //   },
+  //   {
+  //     day: 10,
+  //     weight: 86,
+  //     caloriesBurnt: 240,
+  //   },
+  // ];
+
+  // Specific name and color for the bar chart legent
   const legendName = [
     { name: 'Poids (kg)', color: 'bg-red-600' },
     { name: 'Calories brûlées (kCal)', color: 'bg-black' },
   ];
 
-  // const renderColorfulLegendText = (value) => {
-  //   return <span style={{ color: '#74798C' }}>{value}</span>;
-  // };
-
+  // Specific tooltips for the graph (recharts documentation for more info)
   const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
       return (
@@ -110,7 +129,7 @@ function DailyActivities() {
           <YAxis
             yAxisId="weight"
             orientation="right"
-            domain={['auto', 'auto']}
+            domain={[minWeight - 1, maxWeight + 1]}
             tickCount={3}
             axisLine={false}
             tickLine={false}

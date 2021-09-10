@@ -1,34 +1,39 @@
 import StatCard from './StatCard';
 
-function StatsCards() {
+function StatsCards({
+  caloriecalorieCount,
+  carbohydrateCount,
+  lipidCount,
+  proteinCount,
+}) {
   return (
     <div className="right-wrapper flex flex-col justify-between">
       <StatCard
         icon="calorie"
         title="Calories"
         unit="Kcal"
-        value="1943"
+        value={caloriecalorieCount}
         color="red-card"
       />
       <StatCard
         icon="chicken"
         title="Proteines"
         unit="g"
-        value="155"
+        value={proteinCount}
         color="blue-card"
       />
       <StatCard
         icon="apple"
         title="Glucides"
         unit="g"
-        value="290"
+        value={carbohydrateCount}
         color="yellow-card"
       />
       <StatCard
         icon="burger"
         title="Lipides"
         unit="g"
-        value="50"
+        value={lipidCount}
         color="pink-card"
       />
     </div>
