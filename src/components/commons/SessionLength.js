@@ -56,37 +56,6 @@ function SessionLength({ sessionsLength }) {
   const max = Math.max(...data.map(({ minute }) => minute));
   const min = Math.min(...data.map(({ minute }) => minute));
 
-  // const data = [
-  //   {
-  //     day: 'L',
-  //     minute: 30,
-  //   },
-  //   {
-  //     day: 'M',
-  //     minute: 40,
-  //   },
-  //   {
-  //     day: 'M',
-  //     minute: 64,
-  //   },
-  //   {
-  //     day: 'J',
-  //     minute: 32,
-  //   },
-  //   {
-  //     day: 'V',
-  //     minute: 48,
-  //   },
-  //   {
-  //     day: 'S',
-  //     minute: 40,
-  //   },
-  //   {
-  //     day: 'D',
-  //     minute: 20,
-  //   },
-  // ];
-
   // Specific styles for recharts components tooltip
   const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {

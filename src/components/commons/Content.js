@@ -41,8 +41,8 @@ function Content({
               <DailyActivities sessions={sessions} />
             </div>
           </div>
-          <div className="row flex w-100 justify-between gap-6">
-            <div className="sessionLength-container h-full flex-1 rounded relative flex fle-col justify-end items-end">
+          <div className="row flex w-100 justify-between gap-5">
+            <div className="sessionLength-container h-full flex-1 rounded relative flex fle-col justify-end items-end w-44">
               <h3 className="absolute top-10 left-10 w-36 text-white text-base opacity-50">
                 Durée moyenne des sessions
               </h3>

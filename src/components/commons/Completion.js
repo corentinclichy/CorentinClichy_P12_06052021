@@ -27,7 +27,7 @@ function Completion({ todayScore, score }) {
       <ResponsiveContainer width="100%" height="100%" className="z-50">
         <RadialBarChart
           innerRadius={400}
-          outerRadius={110}
+          outerRadius={90}
           barSize={12}
           data={data}
           startAngle={90}

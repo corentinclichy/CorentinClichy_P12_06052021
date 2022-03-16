@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import {
   Radar,
   RadarChart,
@@ -12,41 +14,9 @@ import {
  * @returns {JSX}
  */
 function StrenghtMap({ performance }) {
-  // const data = [
-  //   {
-  //     subject: 'Intensité',
-  //     A: 120,
-  //     fullMark: 150,
-  //   },
-  //   {
-  //     subject: 'Vitesse',
-  //     A: 98,
-  //     fullMark: 150,
-  //   },
-  //   {
-  //     subject: 'Force',
-  //     A: 86,
-  //     fullMark: 150,
-  //   },
-  //   {
-  //     subject: 'Endurance',
-  //     A: 99,
-  //     fullMark: 150,
-  //   },
-  //   {
-  //     subject: 'Energie',
-  //     A: 85,
-  //     fullMark: 150,
-  //   },
-  //   {
-  //     subject: 'Cardio',
-  //     A: 65,
-  //     fullMark: 150,
-  //   },
-  // ];
+  const fontSize = window.innerWidth < 1200 ? 8 : 13;
 
-  // Get the max value of performance
-  // const maxValue = Math.max(...performance.map((item) => item.value));
+  console.log(fontSize);
 
   const data = performance.map(({ value, kind }) => {
     let areaOfPerformance;
@@ -91,7 +61,7 @@ function StrenghtMap({ performance }) {
           stroke="rgba(255, 255, 255)"
           tickLine={false}
           axisLine={false}
-          tick={{ fontSize: 14, dy: 3 }}
+          tick={{ fontSize: { fontSize }, dy: 3 }}
           tickMargin={30}
         />
         <Radar dataKey="A" fill="#FF0101" fillOpacity={0.7} />
@@ -99,5 +69,9 @@ function StrenghtMap({ performance }) {
     </ResponsiveContainer>
   );
 }
+
+StrenghtMap.propTypes = {
+  userId: PropTypes.string.isRequired,
+};
 
 export default StrenghtMap;
