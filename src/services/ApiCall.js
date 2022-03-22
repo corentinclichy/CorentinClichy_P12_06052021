@@ -14,14 +14,12 @@ const axiosInstance = axios.create({
 });
 
 /**
- *
  * @param {Integer} userId
  * @returns {Object} Return a object with the user data (name, todayScore, and key number (calorie, protein, fat, carbs))
  */
 export const getUserData = async (userId) => {
   try {
     const res = await axiosInstance.get(`user/${userId}`);
-
     return {
       firstName: res.data.data.userInfos.firstName,
       lastName: res.data.data.userInfos.lastName,

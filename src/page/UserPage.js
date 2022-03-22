@@ -16,6 +16,12 @@ import {
   getSessionLengthData,
   getPerformanceData,
 } from '../services/ApiCall';
+import {
+  getUserMockedData,
+  getActivityMockedData,
+  getSessionLengthMockedData,
+  getPerformanceMockedData,
+} from '../services/MockedApi';
 
 /**
  * @name UserPage
@@ -40,27 +46,51 @@ function UserPage() {
 
   // HOOKS => UseEffect to fetch the data when the id changes
   useEffect(() => {
-    const getData = async () => {
-      // Fetch the userData (localhost:300/user/:id)
-      const requestUserData = await getUserData(id);
-      setUserData(requestUserData);
+    if (id.includes('mock')) {
+      const getMockedData = async () => {
+        // Fetch the userData (localhost:300/user/:id)
+        const requestUserData = await getUserMockedData(id);
+        setUserData(requestUserData);
 
-      // Fetch the activityData (localhost:300/user/:id/activity)
-      const requestActivityData = await getActivityData(id, 'activity');
-      setActivityData(requestActivityData);
+        // Fetch the activityData (localhost:300/user/:id/activity)
+        const requestActivityData = await getActivityMockedData(id, 'activity');
+        setActivityData(requestActivityData);
 
-      // Fetch the sessionLengthData (localhost:300/user/:id/sessionLength)
-      const requestSessionLengthData = await getSessionLengthData(id);
-      setSessionLenghtData(requestSessionLengthData);
+        // Fetch the sessionLengthData (localhost:300/user/:id/sessionLength)
+        const requestSessionLengthData = await getSessionLengthMockedData(id);
+        setSessionLenghtData(requestSessionLengthData);
 
-      // Fetch the sessionLengthData (localhost:300/user/:id/sessionLength)
-      const requestPerformanceData = await getPerformanceData(id);
-      setPerformanceData(requestPerformanceData);
+        // Fetch the sessionLengthData (localhost:300/user/:id/sessionLength)
+        const requestPerformanceData = await getPerformanceMockedData(id);
+        setPerformanceData(requestPerformanceData);
 
-      // Pass the loading state to false
-      setLoading(false);
-    };
-    getData();
+        // Pass the loading state to false
+        setLoading(false);
+      };
+      getMockedData();
+    } else {
+      const getData = async () => {
+        // Fetch the userData (localhost:300/user/:id)
+        const requestUserData = await getUserData(id);
+        setUserData(requestUserData);
+
+        // Fetch the activityData (localhost:300/user/:id/activity)
+        const requestActivityData = await getActivityData(id, 'activity');
+        setActivityData(requestActivityData);
+
+        // Fetch the sessionLengthData (localhost:300/user/:id/sessionLength)
+        const requestSessionLengthData = await getSessionLengthData(id);
+        setSessionLenghtData(requestSessionLengthData);
+
+        // Fetch the sessionLengthData (localhost:300/user/:id/sessionLength)
+        const requestPerformanceData = await getPerformanceData(id);
+        setPerformanceData(requestPerformanceData);
+
+        // Pass the loading state to false
+        setLoading(false);
+      };
+      getData();
+    }
   }, [id]);
 
   // Return the JSX to render specific element if the loading state is true

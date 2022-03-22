@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types';
-
 import {
   Radar,
   RadarChart,
@@ -69,9 +67,5 @@ function StrenghtMap({ performance }) {
     </ResponsiveContainer>
   );
 }
-
-StrenghtMap.propTypes = {
-  userId: PropTypes.string.isRequired,
-};
 
 export default StrenghtMap;
