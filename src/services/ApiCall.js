@@ -1,4 +1,5 @@
 import axios from 'axios';
+import DataFormatter from '../model/dataFormatter';
 
 /**
  * Variable: baseUrl - The base url for the API
@@ -20,16 +21,8 @@ const axiosInstance = axios.create({
 export const getUserData = async (userId) => {
   try {
     const res = await axiosInstance.get(`user/${userId}`);
-    return {
-      firstName: res.data.data.userInfos.firstName,
-      lastName: res.data.data.userInfos.lastName,
-      calorieCount: res.data.data.keyData.calorieCount,
-      carbohydrateCount: res.data.data.keyData.carbohydrateCount,
-      lipidCount: res.data.data.keyData.lipidCount,
-      proteinCount: res.data.data.keyData.proteinCount,
-      todayScore: res.data.data.todayScore,
-      score: res.data.data.score,
-    };
+
+    return new DataFormatter(res.data.data).formatUserData();
   } catch (e) {
     return e;
   }
@@ -43,10 +36,7 @@ export const getUserData = async (userId) => {
 export const getActivityData = async (userId) => {
   try {
     const res = await axiosInstance.get(`user/${userId}/activity`);
-
-    return {
-      sessions: res.data.data.sessions,
-    };
+    return new DataFormatter(res.data.data).formatActivityData();
   } catch (e) {
     return e;
   }
@@ -60,10 +50,7 @@ export const getActivityData = async (userId) => {
 export const getSessionLengthData = async (userId) => {
   try {
     const res = await axiosInstance.get(`user/${userId}/average-sessions`);
-
-    return {
-      sessionsLength: res.data.data.sessions,
-    };
+    return new DataFormatter(res.data.data).formatSessionLengthData();
   } catch (e) {
     return e;
   }
@@ -77,11 +64,17 @@ export const getSessionLengthData = async (userId) => {
 export const getPerformanceData = async (userId) => {
   try {
     const res = await axiosInstance.get(`user/${userId}/performance`);
-
-    return {
-      performance: res.data.data.data,
-    };
+    return new DataFormatter(res.data.data).formatPerformanceData();
   } catch (e) {
     return e;
   }
+};
+
+export const fetchAllDataApi = async (userId) => {
+  return {
+    userData: await getUserData(userId),
+    activityData: await getActivityData(userId),
+    sessionLengthData: await getSessionLengthData(userId),
+    performanceData: await getPerformanceData(userId),
+  };
 };

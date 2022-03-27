@@ -14,47 +14,10 @@ import {
  * @returns {JSX}
  */
 function SessionLength({ sessionsLength }) {
-  // Map the sessions length array and return a correct format for recharts
-  const data = sessionsLength.map(({ day, sessionLength }) => {
-    let dayFirstLetter;
-
-    // Get the first letter of the day
-    switch (day) {
-      case 1:
-        dayFirstLetter = 'L';
-        break;
-      case 2:
-        dayFirstLetter = 'M';
-        break;
-      case 3:
-        dayFirstLetter = 'M';
-        break;
-      case 4:
-        dayFirstLetter = 'J';
-        break;
-      case 5:
-        dayFirstLetter = 'V';
-        break;
-      case 6:
-        dayFirstLetter = 'S';
-        break;
-      case 7:
-        dayFirstLetter = 'D';
-        break;
-
-      default:
-        break;
-    }
-
-    return {
-      day: dayFirstLetter,
-      minute: sessionLength,
-    };
-  });
-
+  console.log(sessionsLength);
   // GET THE MAX AND MIN TO SET THE Y AXIS RANGE
-  const max = Math.max(...data.map(({ minute }) => minute));
-  const min = Math.min(...data.map(({ minute }) => minute));
+  const max = Math.max(...sessionsLength.map(({ minute }) => minute));
+  const min = Math.min(...sessionsLength.map(({ minute }) => minute));
 
   // Specific styles for recharts components tooltip
   const CustomTooltip = ({ active, payload }) => {
@@ -70,7 +33,7 @@ function SessionLength({ sessionsLength }) {
 
   return (
     <ResponsiveContainer width="100%" height="100%">
-      <LineChart width="100%" height="100%" data={data}>
+      <LineChart width="100%" height="100%" data={sessionsLength}>
         <defs>
           <linearGradient id="colorUv" x1="0" y1="0" x2="1" y2="0">
             <stop offset="1%" stopColor="#cccccc" stopOpacity={0.3} />

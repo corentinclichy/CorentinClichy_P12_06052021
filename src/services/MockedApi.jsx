@@ -4,6 +4,7 @@ import {
   userAvgSession,
   userPerformance,
 } from '../mocked-data/mockedData';
+import DataFormatter from '../model/dataFormatter';
 
 const getUserId = (userIdWithMock) => {
   return +userIdWithMock.split('-')[0];
@@ -18,16 +19,7 @@ export const getUserMockedData = async (userId) => {
     // find element in userInfo where userId === getUserId(userId)
     const res = userInfo.find((user) => user.id === getUserId(userId));
 
-    return {
-      firstName: res.userInfos.firstName,
-      lastName: res.userInfos.lastName,
-      calorieCount: res.keyData.calorieCount,
-      carbohydrateCount: res.keyData.carbohydrateCount,
-      lipidCount: res.keyData.lipidCount,
-      proteinCount: res.keyData.proteinCount,
-      todayScore: res.todayScore,
-      score: res.score,
-    };
+    return new DataFormatter(res).formatUserData();
   } catch (e) {
     return e;
   }
@@ -44,9 +36,7 @@ export const getActivityMockedData = async (userId) => {
       (user) => user.userId === getUserId(userId),
     );
 
-    return {
-      sessions: res.sessions,
-    };
+    return new DataFormatter(res).formatActivityData();
   } catch (e) {
     return e;
   }
@@ -63,9 +53,7 @@ export const getSessionLengthMockedData = async (userId) => {
       (user) => user.userId === getUserId(userId),
     );
 
-    return {
-      sessionsLength: res.sessions,
-    };
+    return new DataFormatter(res).formatSessionLengthData();
   } catch (e) {
     return e;
   }
@@ -78,15 +66,21 @@ export const getSessionLengthMockedData = async (userId) => {
  */
 export const getPerformanceMockedData = async (userId) => {
   try {
-    console.log(userPerformance);
     const res = userPerformance.find(
       (user) => user.userId === getUserId(userId),
     );
 
-    return {
-      performance: res.data,
-    };
+    return new DataFormatter(res).formatPerformanceData();
   } catch (e) {
     return e;
   }
+};
+
+export const fetchAllMockedDataApi = async (userId) => {
+  return {
+    userData: await getUserMockedData(userId),
+    activityData: await getActivityMockedData(userId),
+    sessionLengthData: await getSessionLengthMockedData(userId),
+    performanceData: await getPerformanceMockedData(userId),
+  };
 };
